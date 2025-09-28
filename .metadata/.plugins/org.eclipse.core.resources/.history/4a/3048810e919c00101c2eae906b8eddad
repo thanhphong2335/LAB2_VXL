@@ -320,7 +320,6 @@ int index_led = 0;
 int dot_counter=100;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
     counter--;
-    dot_counter--;
     if (counter <= 0) {
         counter = 50;
 
