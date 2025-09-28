@@ -367,7 +367,7 @@ int dot_counter=0;
 	 counter--;
 	 dot_counter--;
 	 if (counter <= 0) {
-		 counter = 25;
+		 counter = 50;
 		 update7SEG(index_led);
 		 index_led++;
 		 if(index_led>=MAX_LED)index_led=0;

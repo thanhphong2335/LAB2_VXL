@@ -1,4 +1,4 @@
-01:03:58 **** Incremental Build of configuration Debug for project lab2_ex ****
+01:11:06 **** Incremental Build of configuration Debug for project lab2_ex ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'update7SEG':
@@ -30,5 +30,5 @@ Finished building: lab2_ex.bin
 Finished building: lab2_ex.list
  
 
-01:03:59 Build Finished. 0 errors, 2 warnings. (took 552ms)
+01:11:07 Build Finished. 0 errors, 2 warnings. (took 537ms)
 
