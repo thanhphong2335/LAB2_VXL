@@ -98,7 +98,14 @@ void update7SEG(int index){
 	 break;
 	 }
 }
-
+int hour;
+int minute;
+void updateClockBuffer(){
+	led_buffer[0]=hour/10;
+	led_buffer[1]=hour%10;
+	led_buffer[2]=minute/10;
+	led_buffer[3]=minute%10;
+}
 void display7SEG(int num) {
 			HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
@@ -188,13 +195,6 @@ void display7SEG(int num) {
 		            break;
 		    }
 		}
-int hour = 15, minute = 8, second = 50;
-void updateClockBuffer(){
-	led_buffer[0]=hour/10;
-	led_buffer[1]=hour%10;
-	led_buffer[2]=minute/10;
-	led_buffer[3]=minute%10;
-}
 /* USER CODE END 0 */
 
 /**
@@ -232,7 +232,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
+  hour = 15, minute = 8, second = 50;
   while (1)
   {
 	  second++;

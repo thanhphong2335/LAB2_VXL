@@ -71,6 +71,7 @@ void update7SEG(int index){
 
 	 break;
 	 case 1:
+	 //Display the second 7SEG with led_buffer[1]
 		 HAL_GPIO_WritePin(EN0_GPIO_Port,EN0_Pin,GPIO_PIN_SET);
 		 HAL_GPIO_WritePin(EN1_GPIO_Port,EN1_Pin,GPIO_PIN_SET);
 		 HAL_GPIO_WritePin(EN2_GPIO_Port,EN2_Pin,GPIO_PIN_SET);
@@ -79,6 +80,7 @@ void update7SEG(int index){
 		 display7SEG(led_buffer[1]);
 	 break;
 	 case 2:
+	 //Display the third 7SEG with led_buffer[2]
 		 HAL_GPIO_WritePin(EN0_GPIO_Port,EN0_Pin,GPIO_PIN_SET);
 		 HAL_GPIO_WritePin(EN1_GPIO_Port,EN1_Pin,GPIO_PIN_SET);
 		 HAL_GPIO_WritePin(EN2_GPIO_Port,EN2_Pin,GPIO_PIN_SET);
@@ -87,6 +89,7 @@ void update7SEG(int index){
 		 display7SEG(led_buffer[2]);
 	 break;
 	 case 3:
+	 //Display the forth 7SEG with led_buffer[3]
 		 HAL_GPIO_WritePin(EN0_GPIO_Port,EN0_Pin,GPIO_PIN_SET);
 		 HAL_GPIO_WritePin(EN1_GPIO_Port,EN1_Pin,GPIO_PIN_SET);
 		 HAL_GPIO_WritePin(EN2_GPIO_Port,EN2_Pin,GPIO_PIN_SET);
@@ -98,7 +101,6 @@ void update7SEG(int index){
 	 break;
 	 }
 }
-
 void display7SEG(int num) {
 			HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
@@ -188,13 +190,6 @@ void display7SEG(int num) {
 		            break;
 		    }
 		}
-int hour = 15, minute = 8, second = 50;
-void updateClockBuffer(){
-	led_buffer[0]=hour/10;
-	led_buffer[1]=hour%10;
-	led_buffer[2]=minute/10;
-	led_buffer[3]=minute%10;
-}
 /* USER CODE END 0 */
 
 /**
@@ -232,23 +227,10 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
   while (1)
   {
-	  second++;
-	  if (second >= 60){
-		  second = 0;
-		  minute++;
-	  }
-	  if(minute >= 60){
-		  minute = 0;
-		  hour++;
-	  }
-	  if(hour >=24){
-		  hour = 0;
-	  }
-	  updateClockBuffer();
-	  HAL_Delay(1000);
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -381,10 +363,10 @@ static void MX_GPIO_Init(void)
 int counter = 0;
 int dot_counter=0;
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	 counter--;
 	 dot_counter--;
-	 if (counter <= 0){
+	 if (counter <= 0) {
 		 counter = 25;
 		 update7SEG(index_led);
 		 index_led++;

@@ -1,4 +1,4 @@
-01:11:06 **** Incremental Build of configuration Debug for project lab2_ex ****
+20:36:24 **** Incremental Build of configuration Debug for project lab2_ex ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'update7SEG':
@@ -6,8 +6,8 @@ arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -D
    70 |    display7SEG(led_buffer[0]);
       |    ^~~~~~~~~~~
 ../Core/Src/main.c: At top level:
-../Core/Src/main.c:104:6: warning: conflicting types for 'display7SEG'
-  104 | void display7SEG(int num) {
+../Core/Src/main.c:102:6: warning: conflicting types for 'display7SEG'
+  102 | void display7SEG(int num) {
       |      ^~~~~~~~~~~
 ../Core/Src/main.c:70:4: note: previous implicit declaration of 'display7SEG' was here
    70 |    display7SEG(led_buffer[0]);
@@ -18,13 +18,13 @@ Finished building target: lab2_ex.elf
 arm-none-eabi-size   lab2_ex.elf 
 arm-none-eabi-objdump -h -S  lab2_ex.elf  > "lab2_ex.list"
 arm-none-eabi-objcopy  -O ihex  lab2_ex.elf  "lab2_ex.hex"
-   text	   data	    bss	    dec	    hex	filename
-   7984	     36	   1652	   9672	   25c8	lab2_ex.elf
 arm-none-eabi-objcopy  -O binary  lab2_ex.elf  "lab2_ex.bin"
+   text	   data	    bss	    dec	    hex	filename
+   8280	     48	   1656	   9984	   2700	lab2_ex.elf
 Finished building: default.size.stdout
  
-Finished building: lab2_ex.hex
 Finished building: lab2_ex.bin
+Finished building: lab2_ex.hex
  
  
 Finished building: lab2_ex.list
