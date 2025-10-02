@@ -226,9 +226,91 @@ void timer_run(){
 		if(timer1_counter ==0)timer1_flag=1;
 	}
 }
-const int MAX_LED_MATRIX = 8;
+GPIO_TypeDef* ENM_PORTS[8] = {ENM0_GPIO_Port, ENM1_GPIO_Port, ENM2_GPIO_Port, ENM3_GPIO_Port, ENM4_GPIO_Port,ENM5_GPIO_Port,ENM6_GPIO_Port,ENM7_GPIO_Port};
+uint16_t ENM_PINS[8] = {ENM0_Pin, ENM1_Pin, ENM2_Pin, ENM3_Pin, ENM4_Pin,ENM5_Pin,ENM6_Pin,ENM7_Pin};
+
+GPIO_TypeDef* ROW_PORTS[8] = {ROW0_GPIO_Port, ROW1_GPIO_Port, ROW2_GPIO_Port, ROW3_GPIO_Port, ROW4_GPIO_Port,ROW5_GPIO_Port,ROW6_GPIO_Port,ROW7_GPIO_Port};
+uint16_t ROW_PINS[8] = {ROW0_Pin, ROW1_Pin, ROW2_Pin, ROW3_Pin, ROW4_Pin,ROW5_Pin,ROW6_Pin,ROW7_Pin};
+ const int MAX_LED_MATRIX = 8;
  int index_led_matrix = 0;
- uint8_t matrix_buffer[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
+ uint8_t matrix_buffer[8] = {
+		  0b00000000,
+		  0b00011000,
+		  0b00100100,
+		  0b00100100,
+		  0b00111100,
+		  0b00100100,
+		  0b00100100,
+		  0b00000000,
+		  };
+
+  void moveupletter() {
+      int offset = 0;
+      while (1) {
+          displayupletter(matrix_buffer, offset);
+          HAL_Delay(50);
+          offset++;
+          if (offset > 7) {
+              offset = 0;
+          }
+      }
+  }
+  void displayupletter(uint8_t matrix[8], int offset) {
+      uint8_t shifted_matrix[8];
+              for (int row = 0; row < 8; row++) {
+                  int new_row = (row - offset + 8) % 8;
+                  shifted_matrix[new_row] = matrix[row];
+              }
+          for (int col = 0; col<=7; col++) {
+              for (int row = 0; row<=7; row++) {
+                  if (shifted_matrix[row] & (1 << (7 - col))) {
+                      HAL_GPIO_WritePin(ROW_PORTS[row], ROW_PINS[row], GPIO_PIN_RESET);
+                  } else {
+                      HAL_GPIO_WritePin(ROW_PORTS[row], ROW_PINS[row], GPIO_PIN_SET);
+                  }
+              }
+              HAL_GPIO_WritePin(ENM_PORTS[col], ENM_PINS[col], GPIO_PIN_RESET);
+              HAL_Delay(2);
+              HAL_GPIO_WritePin(ENM_PORTS[col], ENM_PINS[col], GPIO_PIN_SET);
+          }
+      }
+
+ void displayleftletter(uint8_t matrix[8], int offset) {
+     uint8_t shifted_matrix[8];
+     for (int row = 0; row <=7; row++) {
+         shifted_matrix[row] = matrix[row] << offset;
+         if (offset > 0) {
+             shifted_matrix[row] |= matrix[row] >> (8 - offset);
+         }
+     }
+     for (int col = 0; col <=7; col++) {
+         for (int row = 0; row < 8; row++) {
+             if (shifted_matrix[row] & (1 << (7 - col))) {
+                 HAL_GPIO_WritePin(ROW_PORTS[row], ROW_PINS[row], GPIO_PIN_RESET);
+             } else {
+                 HAL_GPIO_WritePin(ROW_PORTS[row], ROW_PINS[row], GPIO_PIN_SET);
+             }
+         }
+         HAL_GPIO_WritePin(ENM_PORTS[col], ENM_PINS[col], GPIO_PIN_RESET);
+         HAL_Delay(2);
+         HAL_GPIO_WritePin(ENM_PORTS[col], ENM_PINS[col], GPIO_PIN_SET);
+     }
+ }
+
+ void moveleftletter() {
+     int offset = 0;
+     while (1) {
+         displayleftletter(matrix_buffer, offset);
+         HAL_Delay(50);
+         offset++;
+         if (offset > 7) {
+             offset = 0;
+         }
+     }
+ }
+
+
+
  void updateLEDMatrix(int index){
 	HAL_GPIO_WritePin(ROW0_GPIO_Port,ROW0_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(ROW1_GPIO_Port,ROW1_Pin,GPIO_PIN_SET);
@@ -329,6 +411,7 @@ int main(void)
 
   while (1)
   {
+	  moveupletter();
 	  if(timer0_flag == 1){
 		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
@@ -352,18 +435,12 @@ int main(void)
 		  update7SEG(index_led);
 		  index_led++;
 		  if(index_led>=MAX_LED)index_led=0;
-		  updateLEDMatrix(matrix_buffer[index_led_matrix]);
-		  index_led_matrix ++;
-		  if(index_led_matrix>=MAX_LED_MATRIX)index_led_matrix=0;
-		  setTimer1(250);
+//		  updateLEDMatrix(index_led_matrix);
+//		  index_led_matrix ++;
+//		  if(index_led_matrix>=MAX_LED_MATRIX)index_led_matrix=0;
+//		  setTimer1(250);
 	  }
-	  if(timer1_flag==1){
-		updateLEDMatrix(matrix_buffer[index_led_matrix]);
-		index_led_matrix ++;
-		if(index_led_matrix>=MAX_LED_MATRIX)index_led_matrix=0;
-		setTimer2(225);
 
-	  }
 
 
 
