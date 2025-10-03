@@ -1,4 +1,4 @@
-05:41:42 **** Incremental Build of configuration Debug for project lab2_ex ****
+15:01:10 **** Incremental Build of configuration Debug for project lab2_ex ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'update7SEG':
@@ -12,17 +12,6 @@ arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -D
 ../Core/Src/main.c:70:4: note: previous implicit declaration of 'display7SEG' was here
    70 |    display7SEG(led_buffer[0]);
       |    ^~~~~~~~~~~
-../Core/Src/main.c: In function 'moveupletter':
-../Core/Src/main.c:250:11: warning: implicit declaration of function 'displayupletter' [-Wimplicit-function-declaration]
-  250 |           displayupletter(matrix_buffer, offset);
-      |           ^~~~~~~~~~~~~~~
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:258:8: warning: conflicting types for 'displayupletter'
-  258 |   void displayupletter(uint8_t matrix[8], int offset) {
-      |        ^~~~~~~~~~~~~~~
-../Core/Src/main.c:250:11: note: previous implicit declaration of 'displayupletter' was here
-  250 |           displayupletter(matrix_buffer, offset);
-      |           ^~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "lab2_ex.elf" @"objects.list"   -mcpu=cortex-m3 -T"D:\GIT_LAB2_VXL\lab2_ex\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lab2_ex.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: lab2_ex.elf
  
@@ -30,7 +19,7 @@ arm-none-eabi-size   lab2_ex.elf
 arm-none-eabi-objdump -h -S  lab2_ex.elf  > "lab2_ex.list"
 arm-none-eabi-objcopy  -O ihex  lab2_ex.elf  "lab2_ex.hex"
    text	   data	    bss	    dec	    hex	filename
-   8848	    156	   1668	  10672	   29b0	lab2_ex.elf
+   9008	    156	   1684	  10848	   2a60	lab2_ex.elf
 arm-none-eabi-objcopy  -O binary  lab2_ex.elf  "lab2_ex.bin"
 Finished building: default.size.stdout
  
@@ -41,5 +30,5 @@ Finished building: lab2_ex.bin
 Finished building: lab2_ex.list
  
 
-05:41:43 Build Finished. 0 errors, 4 warnings. (took 539ms)
+15:01:10 Build Finished. 0 errors, 2 warnings. (took 574ms)
 
