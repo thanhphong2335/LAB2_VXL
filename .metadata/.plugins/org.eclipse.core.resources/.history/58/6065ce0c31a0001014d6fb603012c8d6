@@ -365,7 +365,7 @@ int main(void)
 		updateLEDMatrix(index_led_matrix);
 		index_led_matrix ++;
 		if(index_led_matrix>=MAX_LED_MATRIX)index_led_matrix=0;
-		setTimer2(10);
+		setTimer2(1000);
 	  }
 
 
