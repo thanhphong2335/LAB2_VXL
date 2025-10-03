@@ -286,6 +286,7 @@ uint16_t ROW_PINS[8] = {ROW0_Pin, ROW1_Pin, ROW2_Pin, ROW3_Pin, ROW4_Pin,ROW5_Pi
           if (offset > 7) {
               offset = 0;
           }
+          setTimer2(50);
       }
 
 
