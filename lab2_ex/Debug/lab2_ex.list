@@ -597,7 +597,7 @@ void display7SEG(int num) {
 
 08000524 <updateClockBuffer>:
 
-int hour = 15, minute = 8, second = 50;
+int hour = 23, minute = 59, second = 55;
 void updateClockBuffer(){
  8000524:	b480      	push	{r7}
  8000526:	af00      	add	r7, sp, #0

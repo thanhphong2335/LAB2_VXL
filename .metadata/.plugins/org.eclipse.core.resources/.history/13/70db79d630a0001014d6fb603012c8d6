@@ -189,7 +189,7 @@ void display7SEG(int num) {
 		    }
 		}
 
-int hour = 23, minute = 59, second = 55;
+int hour = 15, minute = 8, second = 50;
 void updateClockBuffer(){
 	led_buffer[0]=hour/10;
 	led_buffer[1]=hour%10;
