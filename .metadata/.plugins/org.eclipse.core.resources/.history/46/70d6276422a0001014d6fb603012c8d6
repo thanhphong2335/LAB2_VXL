@@ -328,7 +328,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   setTimer0(1000);
   setTimer1(250);
-  setTimer2(1000);
+  setTimer2(100);
   updateClockBuffer();
 
   while (1)
@@ -365,7 +365,7 @@ int main(void)
 		updateLEDMatrix(index_led_matrix);
 		index_led_matrix ++;
 		if(index_led_matrix>=MAX_LED_MATRIX)index_led_matrix=0;
-		setTimer2(1000);
+		setTimer2(100);
 	  }
 
 
